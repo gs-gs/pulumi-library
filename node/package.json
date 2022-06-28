@@ -1,5 +1,6 @@
 {
   "name": "@gs-pulumi-library/node",
+  "version": "0.0.1",
   "description": "GoSource Pulumi library for Node.js",
   "scripts": {
     "build": "tsc",
