@@ -1,1 +1,2 @@
-export * as components from "./components/aws";
+export * as components from "./components";
+export * as policies from "./policies";
