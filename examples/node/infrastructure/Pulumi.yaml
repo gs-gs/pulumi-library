@@ -1,0 +1,5 @@
+name: example-pulumi-project
+runtime: nodejs
+description: Example pulumi project for demonstration
+options:
+  refresh: always
