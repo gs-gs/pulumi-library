@@ -19,7 +19,18 @@
     make test
     make build
     ```
-3. Run "pulumi preview" step:
+3.  Install Pulumi
+    ```
+    # Download and install required tools pulumi
+    rm -rf $HOME/.pulumi
+    rm -rf /usr/local/bin/pulumi*
+    curl -fsSL https://get.pulumi.com | sh -s --
+    /bin/cp -rf $HOME/.pulumi/bin/* /usr/local/bin
+    
+    cd infrastructure && npm ci
+    ```
+
+4. Run "pulumi preview" step:
     ```
     # This previews your changes explicitly before deploying.
     # It also run the compliance checks against the Policy-as-Code!
