@@ -9,7 +9,8 @@ export AWS_SECRET_ACCESS_KEY=$(echo ${OUT} | jq -r '.Credentials''.SecretAccessK
 export AWS_SESSION_TOKEN=$(echo ${OUT} | jq -r '.Credentials''.SessionToken')
 
 # Login to self-hosted backend
-pulumi login ${PULUMI_STATE_URL} -C infrastructure/;
+export PULUMI_CONFIG_PASSPHRASE=""
+pulumi login s3://${AWS_ACCOUNT_ID}-pulumi-state -C infrastructure/;
 
 pulumi stack select ${APP_NAME}-${ENV} --create -C infrastructure/;
 
