@@ -27,7 +27,7 @@ GoSource Pulumi shared component library.
 
 The following components are currently configured:
 
-| Syntax                  | Description       |  Node.JS     | Python      |
+| Component                  | Description       |  Node.JS     | Python      |
 | -----------             | ----------- | ----------- | ----------- |
 |  [aws:CloudFrontWebsite](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/CloudfrontWebsite.ts)  | Cloudfront distribution with S3 origin, alias/cert and access logging  | :heavy_check_mark:       | :x:       |
 |  [aws:S3Bucket](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/S3Bucket.ts)           | S3 bucket with default encryption and access logging  | :heavy_check_mark:       | :x:      |
@@ -37,7 +37,7 @@ The following components are currently configured:
 
 The following components are currently configured:
 
-| Syntax                  | Description       |  Node.JS     | Python      |
+| Component                  | Description       |  Node.JS     | Python      |
 | -----------             | ----------- | ----------- | ----------- |
 |  [aws:ApiGateway](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/apiGateway.ts)  | Resource compliance policies for aws:ApiGateway  | :heavy_check_mark:       | :x:       |
 |  [aws:Cloudfront](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/cloudfront.ts)  | Resource compliance policies for aws:Cloudfront | :heavy_check_mark:       | :x:      |
@@ -53,4 +53,9 @@ The following components are currently configured:
 Pulumi stores metadata about your infrastructure so that it can manage your cloud resources. This metadata is called state, and is stored as a JSON document.
 
 We recommend you store your project state files in S3 or Azure Storage, in the same account as the resource you are privisioning.
-The example pulumi deployment script for AWS demonstrates how to: i) login to the self-managed Pulumi backend, and ii) run Pulumi commands.
+
+**Example deployment scripts**
+
+| Deployment | Description |
+| ----------- | ----------- |
+| [State stored in S3 Bucket](https://github.com/gs-gs/pulumi-library/blob/main/examples/node/scripts/run-pulumi.sh) | Demonstrates logging into S3 state backend and running Pulumi commands to provision infra. |
