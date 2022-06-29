@@ -29,9 +29,9 @@ The following components are currently configured:
 
 | Component                  | Description       |  Node.JS     | Python      |
 | -----------             | ----------- | ----------- | ----------- |
-|  [aws:CloudFrontWebsite](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/CloudfrontWebsite.ts)  | Cloudfront distribution with S3 origin, alias/cert and access logging  | :heavy_check_mark:       | :x:       |
-|  [aws:S3Bucket](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/S3Bucket.ts)           | S3 bucket with default encryption and access logging  | :heavy_check_mark:       | :x:      |
-|  [aws:Vpc](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/Vpc.ts)                | Multi-AZ VPC with public/private subnets, internet gateway and flow logs  | :heavy_check_mark:       | :x:       |
+|  [aws:CloudFrontWebsite](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/CloudfrontWebsite.ts)  | Cloudfront distribution with S3 origin, alias/cert and access logging  | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
+|  [aws:S3Bucket](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/S3Bucket.ts)           | S3 bucket with default encryption and access logging  | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
+|  [aws:Vpc](https://github.com/gs-gs/pulumi-library/blob/main/node/components/aws/Vpc.ts)                | Multi-AZ VPC with public/private subnets, internet gateway and flow logs  | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
 
 **Pulumi Policy Components**
 
@@ -39,12 +39,12 @@ The following components are currently configured:
 
 | Component                  | Description       |  Node.JS     | Python      |
 | -----------             | ----------- | ----------- | ----------- |
-|  [aws:ApiGateway](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/apiGateway.ts)  | Resource compliance policies for aws:ApiGateway  | :heavy_check_mark:       | :x:       |
-|  [aws:Cloudfront](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/cloudfront.ts)  | Resource compliance policies for aws:Cloudfront | :heavy_check_mark:       | :x:      |
-|  [aws:Kms](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/kms.ts)         | Resource compliance policies for aws:KMS | :heavy_check_mark:       | :x:       |
-|  [aws:Lambda](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/lambda.ts)         | Resource compliance policies for aws:Lambda  | :heavy_check_mark:       | :x:       |
-|  [aws:S3](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/s3.ts)         | Resource compliance policies for aws:S3  | :heavy_check_mark:       | :x:       |
-|  [aws:Vpc](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/vpc.ts)         | Resource compliance policies for aws:Vpc  | :heavy_check_mark:       | :x:       |
+|  [aws:ApiGateway](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/apiGateway.ts)  | Resource compliance policies for aws:ApiGateway  | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
+|  [aws:Cloudfront](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/cloudfront.ts)  | Resource compliance policies for aws:Cloudfront | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
+|  [aws:Kms](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/kms.ts)         | Resource compliance policies for aws:KMS | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
+|  [aws:Lambda](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/lambda.ts)         | Resource compliance policies for aws:Lambda  | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
+|  [aws:S3](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/s3.ts)         | Resource compliance policies for aws:S3  | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
+|  [aws:Vpc](https://github.com/gs-gs/pulumi-library/blob/main/node/policies/aws/vpc.ts)         | Resource compliance policies for aws:Vpc  | :heavy_check_mark:       | :hourglass_flowing_sand: Not yet! |
 
 ## Recommended Deployment Pattern
 
