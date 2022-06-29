@@ -14,28 +14,14 @@ import {
  */
 export const lambdaInsideVpc: ResourceValidationPolicy = {
   name: "lambda-inside-vpc",
-  description:
-    "Checks whether an AWS Lambda function is allowed access to an Amazon Virtual Private Cloud.",
-  validateResource: validateResourceOfType(
-    aws.lambda.Function,
-    (lambdaFn, _, reportViolation) => {
-      if (
-        !lambdaFn.vpcConfig?.securityGroupIds ||
-        lambdaFn.vpcConfig.securityGroupIds.length === 0
-      ) {
-        reportViolation(
-          `Lambda function "${lambdaFn.name}" is has no security groups configured.`
-        );
-      }
-
-      if (
-        !lambdaFn.vpcConfig?.subnetIds ||
-        lambdaFn.vpcConfig.subnetIds.length === 0
-      ) {
-        reportViolation(
-          `Lambda function "${lambdaFn.name}" is has no subnets configured.`
-        );
-      }
+  description: "Checks whether an AWS Lambda function is allowed access to an Amazon Virtual Private Cloud.",
+  validateResource: validateResourceOfType(aws.lambda.Function, (lambdaFn, _, reportViolation) => {
+    if (!lambdaFn.vpcConfig?.securityGroupIds || lambdaFn.vpcConfig.securityGroupIds.length === 0) {
+      reportViolation(`Lambda function "${lambdaFn.name}" has no security groups configured.`);
     }
-  ),
+
+    if (!lambdaFn.vpcConfig?.subnetIds || lambdaFn.vpcConfig.subnetIds.length === 0) {
+      reportViolation(`Lambda function "${lambdaFn.name}" has no subnets configured.`);
+    }
+  }),
 };
