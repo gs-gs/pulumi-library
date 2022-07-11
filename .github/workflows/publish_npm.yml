@@ -14,6 +14,8 @@ jobs:
 
       # Setup .npmrc file to publish to npm
       - name: Configure .npmrc
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
           echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> .npmrc
           echo "registry=https://registry.npmjs.org/" >> .npmrc
