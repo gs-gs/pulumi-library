@@ -1,12 +1,15 @@
 {
   "name": "gs-pulumi-library",
-  "version": "0.0.6",
+  "version": "0.0.10",
   "description": "GoSource Pulumi library for Node.js",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
-    "test": "jest"
+    "test": "jest",
+    "prepublish": "npm run build"
   },
   "dependencies": {
     "@pulumi/aws": "^5.0.0",
@@ -35,5 +38,9 @@
     "jest": "^27.0.2",
     "prettier": "^2.3.1",
     "ts-jest": "^27.0.2"
-  }
+  },
+  "files": [
+    "dist/*",
+    "dist/**/*"
+  ]
 }

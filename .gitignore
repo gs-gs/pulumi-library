@@ -1,4 +1,5 @@
 .npmrc
+node_modules
 
 # Logs
 logs

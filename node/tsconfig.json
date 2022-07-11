@@ -2,8 +2,9 @@
   "compilerOptions": {
     "strict": true,
     "outDir": "dist",
-    "target": "ES2017",
+    "target": "ES2020",
     "module": "commonjs",
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
@@ -15,5 +16,5 @@
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "."
   },
-  "exclude": ["**/*.test.ts", "*.test.ts", "**/*.spec.ts", "*.spec.ts"]
+  "exclude": ["node_modules", "dist/**/*", "**/*.test.ts", "*.test.ts", "**/*.spec.ts", "*.spec.ts"]
 }
