@@ -1,6 +1,6 @@
-import { components, policies } from "./index";
+import { Components, Policies } from "./index";
 
 it("exports correctly", () => {
-  expect(components).toBeDefined();
-  expect(policies).toBeDefined();
+  expect(Components).toBeDefined();
+  expect(Policies).toBeDefined();
 });

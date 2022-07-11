@@ -1,2 +1,2 @@
-export * as components from "./components";
-export * as policies from "./policies";
+export * as Components from "./components";
+export * as Policies from "./policies";

@@ -1,10 +1,10 @@
-import { PoliciesApiGateway, PoliciesCloudfront, PoliciesKms, PoliciesLambda, PoliciesS3, PoliciesVpc } from "./index";
+import { ApiGateway, Cloudfront, Kms, Lambda, S3, Vpc } from "./index";
 
 it("exports correctly", () => {
-  expect(PoliciesApiGateway).toBeDefined();
-  expect(PoliciesCloudfront).toBeDefined();
-  expect(PoliciesKms).toBeDefined();
-  expect(PoliciesLambda).toBeDefined();
-  expect(PoliciesS3).toBeDefined();
-  expect(PoliciesVpc).toBeDefined();
+  expect(ApiGateway).toBeDefined();
+  expect(Cloudfront).toBeDefined();
+  expect(Kms).toBeDefined();
+  expect(Lambda).toBeDefined();
+  expect(S3).toBeDefined();
+  expect(Vpc).toBeDefined();
 });
