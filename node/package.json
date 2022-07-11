@@ -1,7 +1,8 @@
 {
   "name": "gs-pulumi-library",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "GoSource Pulumi library for Node.js",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "lint": "eslint . --ext .ts,.tsx --max-warnings 0",
