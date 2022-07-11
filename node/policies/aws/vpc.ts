@@ -14,18 +14,10 @@ import {
  */
 export const vpcFlowLogsEnabled: StackValidationPolicy = {
   name: "vpc-flow-logs-enabled",
-  description:
-    "Checks whether Amazon Virtual Private Cloud flow logs are found and enabled for Amazon VPC.",
-  validateStack: (
-    args: StackValidationArgs,
-    reportViolation: ReportViolation
-  ) => {
-    const vpcs = args.resources
-      .map((r) => r.asType(aws.ec2.Vpc))
-      .filter((r) => r);
-    const vpcFlowLogs = args.resources
-      .map((r) => r.asType(aws.ec2.FlowLog))
-      .filter((r) => r);
+  description: "Checks whether Amazon Virtual Private Cloud flow logs are found and enabled for Amazon VPC.",
+  validateStack: (args: StackValidationArgs, reportViolation: ReportViolation) => {
+    const vpcs = args.resources.map((r) => r.asType(aws.ec2.Vpc)).filter((r) => r);
+    const vpcFlowLogs = args.resources.map((r) => r.asType(aws.ec2.FlowLog)).filter((r) => r);
 
     const vpcsWithFlowLogs = vpcFlowLogs.map((flowlog) => flowlog?.vpcId);
 
@@ -45,16 +37,9 @@ export const vpcDefaultSecurityGroupClosed: StackValidationPolicy = {
   name: "vpc-default-security-group-closed",
   description:
     "Checks that the default security group of any Amazon Virtual Private Cloud (VPC) does not allow inbound or outbound traffic.",
-  validateStack: (
-    args: StackValidationArgs,
-    reportViolation: ReportViolation
-  ) => {
-    const vpcs = args.resources
-      .map((r) => r.asType(aws.ec2.Vpc))
-      .filter((r) => r);
-    const securityGroups = args.resources
-      .map((r) => r.asType(aws.ec2.SecurityGroup))
-      .filter((r) => r);
+  validateStack: (args: StackValidationArgs, reportViolation: ReportViolation) => {
+    const vpcs = args.resources.map((r) => r.asType(aws.ec2.Vpc)).filter((r) => r);
+    const securityGroups = args.resources.map((r) => r.asType(aws.ec2.SecurityGroup)).filter((r) => r);
 
     for (const vpc of vpcs) {
       const defaultSecurityGroupId = vpc?.defaultSecurityGroupId;
@@ -62,17 +47,13 @@ export const vpcDefaultSecurityGroupClosed: StackValidationPolicy = {
 
       if (vpc && sg && sg.egress) {
         reportViolation(
-          `Default SecurityGroup ${sg.id} for VPC ${
-            vpc.id
-          } allows egress: ${JSON.stringify(sg.egress)}.`
+          `Default SecurityGroup ${sg.id} for VPC ${vpc.id} allows egress: ${JSON.stringify(sg.egress)}.`
         );
       }
 
       if (vpc && sg && sg.ingress) {
         reportViolation(
-          `Default SecurityGroup ${sg.id} for VPC ${
-            vpc.id
-          } allows ingress: ${JSON.stringify(sg.ingress)}.`
+          `Default SecurityGroup ${sg.id} for VPC ${vpc.id} allows ingress: ${JSON.stringify(sg.ingress)}.`
         );
       }
     }

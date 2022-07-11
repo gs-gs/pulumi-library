@@ -26,11 +26,7 @@ export interface VpcArgs extends awsx.ec2.VpcArgs {
 export class Vpc extends pulumi.ComponentResource {
   private _vpc: awsx.ec2.Vpc;
 
-  constructor(
-    name: string,
-    args: VpcArgs,
-    opts?: pulumi.ComponentResourceOptions
-  ) {
+  constructor(name: string, args: VpcArgs, opts?: pulumi.ComponentResourceOptions) {
     super("aws-ec2-vpc", name, {}, opts);
 
     // Pull out `remainaingArgs` to pass into `awsx.ec2.Vpc` constructor.

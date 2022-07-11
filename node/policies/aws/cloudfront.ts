@@ -16,18 +16,15 @@ export const cloudfrontAccesslogsEnabled: ResourceValidationPolicy = {
   name: "cloudfront-access-logging-enabled",
   description:
     "Checks if Amazon CloudFront distributions are configured to capture information from Amazon Simple Storage Service (Amazon S3) server access logs.",
-  validateResource: validateResourceOfType(
-    aws.cloudfront.Distribution,
-    (distribution, _, reportViolation) => {
-      if (!distribution.loggingConfig?.bucket) {
-        reportViolation(
-          `Cloudfront access logging is not configured for distribution with aliases: ${JSON.stringify(
-            distribution.aliases
-          )}.`
-        );
-      }
+  validateResource: validateResourceOfType(aws.cloudfront.Distribution, (distribution, _, reportViolation) => {
+    if (!distribution.loggingConfig?.bucket) {
+      reportViolation(
+        `Cloudfront access logging is not configured for distribution with aliases: ${JSON.stringify(
+          distribution.aliases
+        )}.`
+      );
     }
-  ),
+  }),
 };
 
 /** Checks if Amazon CloudFront distribution with S3 Origin type has Origin Access Identity (OAI) configured.
@@ -38,13 +35,8 @@ export const cloudFrontOriginAccessIdentityEnabled: StackValidationPolicy = {
   name: "cloudfront-origin-access-identity-enabled",
   description:
     "Checks if Amazon CloudFront distribution with S3 Origin type has Origin Access Identity (OAI) configured.",
-  validateStack: (
-    args: StackValidationArgs,
-    reportViolation: ReportViolation
-  ) => {
-    const cloudfrontDists = args.resources
-      .map((r) => r.asType(aws.cloudfront.Distribution))
-      .filter((r) => r);
+  validateStack: (args: StackValidationArgs, reportViolation: ReportViolation) => {
+    const cloudfrontDists = args.resources.map((r) => r.asType(aws.cloudfront.Distribution)).filter((r) => r);
 
     for (const distribution of cloudfrontDists) {
       // Create list of all origins of S3 Type

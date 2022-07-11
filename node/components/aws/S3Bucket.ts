@@ -28,11 +28,7 @@ export interface S3BucketArgs extends aws.s3.BucketArgs {
 export class S3Bucket extends pulumi.ComponentResource {
   bucket: aws.s3.Bucket;
 
-  constructor(
-    name: string,
-    args: S3BucketArgs,
-    opts?: pulumi.ComponentResourceOptions
-  ) {
+  constructor(name: string, args: S3BucketArgs, opts?: pulumi.ComponentResourceOptions) {
     super("aws-s3", name, {}, opts);
 
     // S3 bucket
