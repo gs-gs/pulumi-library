@@ -23,6 +23,7 @@ jobs:
           cache: 'npm'
           cache-dependency-path: node/package-lock.json
       
+      - run: cp $NPM_CONFIG_USERCONFIG .npmrc
       - run: ls
       - run: ls ../
 
