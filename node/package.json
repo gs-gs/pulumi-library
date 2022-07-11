@@ -1,5 +1,5 @@
 {
-  "name": "@gs-pulumi-library/node",
+  "name": "gs-pulumi-library",
   "version": "0.0.1",
   "description": "GoSource Pulumi library for Node.js",
   "scripts": {
