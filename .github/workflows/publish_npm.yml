@@ -2,6 +2,9 @@ name: Publish Package to npmjs
 on:
   release:
     types: [created]
+  push:
+    branches:    
+      - main
 
 jobs:
   build:
@@ -20,6 +23,9 @@ jobs:
           echo "//npm.pkg.github.com/:_authToken=\${NODE_AUTH_TOKEN}" >> .npmrc
           echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "always-auth: true" >> .npmrc
+      
+      - run: ls
+      - run: ls ../
 
       - run: npm ci
       - run: npm run lint
