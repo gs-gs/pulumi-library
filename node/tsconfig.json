@@ -1,20 +1,16 @@
 {
   "compilerOptions": {
-    "strict": true,
     "outDir": "dist",
-    "target": "ES2020",
+    "target": "es2016",
     "module": "commonjs",
-    "esModuleInterop": true,
     "moduleResolution": "node",
     "declaration": true,
     "sourceMap": true,
     "stripInternal": true,
     "experimentalDecorators": true,
-    "pretty": true,
     "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "."
+    "strict": true
   },
-  "exclude": ["node_modules", "dist/**/*", "**/*.test.ts", "*.test.ts", "**/*.spec.ts", "*.spec.ts"]
+  "exclude": ["dist/**/*", "dist/*", "**/*.test.ts", "*.test.ts", "**/*.spec.ts", "*.spec.ts"]
 }

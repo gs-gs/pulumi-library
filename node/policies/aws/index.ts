@@ -1,6 +1,8 @@
-export * as ApiGateway from "./apiGateway";
-export * as Cloudfront from "./cloudfront";
-export * as Kms from "./kms";
-export * as Lambda from "./lambda";
-export * as S3 from "./s3";
-export * as Vpc from "./vpc";
+import * as ApiGateway from "./apiGateway";
+import * as Cloudfront from "./cloudfront";
+import * as Kms from "./kms";
+import * as Lambda from "./lambda";
+import * as S3 from "./s3";
+import * as Vpc from "./vpc";
+
+export { ApiGateway, Cloudfront, Kms, Lambda, S3, Vpc };

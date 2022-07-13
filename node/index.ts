@@ -1,2 +1,4 @@
-export * as Components from "./components";
-export * as Policies from "./policies";
+import * as Components from "./components";
+import * as Policies from "./policies";
+
+export { Components, Policies };
