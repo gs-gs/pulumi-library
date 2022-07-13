@@ -1,6 +1,6 @@
 {
   "name": "gs-pulumi-library",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "GoSource Pulumi library for Node.js",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

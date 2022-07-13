@@ -3,7 +3,7 @@ import * as path from "path";
 import * as aws from "@pulumi/aws";
 import * as pulumi from "@pulumi/pulumi";
 
-import { getAllFiles } from "./utils";
+import { getFiles } from "../utils";
 
 export interface S3BucketArgs extends aws.s3.BucketArgs {
   description: string;
@@ -73,15 +73,18 @@ export class S3Bucket extends pulumi.ComponentResource {
     // If argument `pathToBucketContents` is provided. Iterate through directory adding files to S3.
     // For each file in the directory, create an S3 object
     if (args.pathToBucketContents) {
-      for (const filePath of getAllFiles(args.pathToBucketContents, [])) {
-        const s3key = path.relative(args.pathToBucketContents, filePath);
-        new aws.s3.BucketObject(`${args.bucketName}-${s3key}`, {
-          bucket: this.bucket,
-          key: s3key,
-          source: new pulumi.asset.FileAsset(filePath), // use FileAsset to point to a file
-          contentType: mime.getType(filePath) || undefined, // set the MIME type of the file
-        });
-      }
+      getFiles(args.pathToBucketContents).then((files) => {
+        for (const filePath of files) {
+          // @ts-ignore
+          const s3key = path.relative(args.pathToBucketContents, filePath);
+          new aws.s3.BucketObject(`${args.bucketName}-${s3key}`, {
+            bucket: this.bucket,
+            key: s3key,
+            source: new pulumi.asset.FileAsset(filePath), // use FileAsset to point to a file
+            contentType: mime.getType(filePath) || undefined, // set the MIME type of the file
+          });
+        }
+      });
     }
   }
 
