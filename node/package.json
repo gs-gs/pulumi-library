@@ -1,6 +1,14 @@
 {
   "name": "gs-pulumi-library",
-  "version": "0.2.1",
+  "license": "MIT",
+  "keywords": [
+    "Pulumi",
+    "Infrastructure-as-Code",
+    "Component Library",
+    "AWS",
+    "Azure"
+  ],
+  "version": "0.2.2",
   "description": "GoSource Pulumi library for Node.js",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -37,5 +45,15 @@
     "jest": "^27.0.2",
     "prettier": "^2.3.1",
     "ts-jest": "^27.0.2"
+  },
+  "contributors": [
+    {
+      "name": "Ram Parameswaran",
+      "url": "https://github.com/RamParameswaran"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gs-gs/pulumi-library"
   }
 }
