@@ -38,7 +38,8 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
     super("aws-s3-cloudfront", name, {}, opts);
 
     // Define us-east-1 provider (required for CloudFront certificates)
-    const useast1 = new aws.Provider("useast1", { region: "us-east-1" });
+    // Provider name must be unique
+    const useast1 = new aws.Provider(`${args.targetDomain}-useast1`, { region: "us-east-1" });
 
     this.s3Bucket = args.s3Bucket;
     this.originAccessIdentity = args.originAccessIdentity;
