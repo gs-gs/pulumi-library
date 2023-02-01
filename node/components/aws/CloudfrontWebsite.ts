@@ -13,6 +13,8 @@ export interface CloudfrontWebsiteArgs {
   logBucketPrefix?: string; // (Optional) S3 Bucket prefix for access logs.
 
   originAccessIdentity: aws.cloudfront.OriginAccessIdentity; // Origin Access Identity to access the private s3 bucket
+  
+  webAclId?: string | pulumi.Output<string>; // (Optional) Associate an existing WAF
 }
 
 /**
@@ -177,6 +179,10 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
         includeCookies: true,
         prefix: args.logBucketPrefix,
       };
+    }
+    
+    if (args.webAclId) {
+      cloudFrontArgs["webAclId"] = args.webAclId
     }
 
     this.cloudfrontDistribution = new aws.cloudfront.Distribution(
