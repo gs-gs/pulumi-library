@@ -208,4 +208,8 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
   public cloudfrontAliases(): pulumi.Output<string[] | undefined> {
     return this.cloudfrontDistribution.aliases;
   }
+ 
+  public cloudfrontARN(): pulumi.Output<string[] | undefined> {
+    return this.cloudfrontDistribution.arn;
+  }
 }
