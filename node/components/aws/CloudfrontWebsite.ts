@@ -15,6 +15,8 @@ export interface CloudfrontWebsiteArgs {
   originAccessIdentity: aws.cloudfront.OriginAccessIdentity; // Origin Access Identity to access the private s3 bucket
 
   webAclId?: string | pulumi.Output<string>; // (Optional) Associate an existing WAF
+
+  lambdaRole?: string; // (Optional) Associate a lambda role with s3 bucket permissions
 }
 
 /**
