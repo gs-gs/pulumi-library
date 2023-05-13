@@ -33,7 +33,6 @@ export interface CloudfrontWebsiteArgs {
  */
 export class CloudfrontWebsite extends pulumi.ComponentResource {
   s3Bucket: aws.s3.Bucket;
-  bucketPolicy: aws.s3.BucketPolicy;
   certificate: aws.acm.Certificate;
   cloudfrontDistribution: aws.cloudfront.Distribution;
   originAccessIdentity: aws.cloudfront.OriginAccessIdentity;
@@ -49,7 +48,7 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
     this.originAccessIdentity = args.originAccessIdentity;
 
     if (!args.skipDefaultBucketPermission) {
-      this.bucketPolicy = new aws.s3.BucketPolicy(`${args.targetDomain}-bucketPolicy`, {
+      const bucketPolicyDefault = new aws.s3.BucketPolicy(`${args.targetDomain}-bucketPolicy`, {
         bucket: this.s3Bucket.id, // refer to the bucket created earlier
         policy: pulumi.all([this.originAccessIdentity.iamArn, this.s3Bucket.arn]).apply(([oaiArn, bucketArn]) =>
           JSON.stringify({
