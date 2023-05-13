@@ -16,7 +16,7 @@ export interface CloudfrontWebsiteArgs {
 
   webAclId?: string | pulumi.Output<string>; // (Optional) Associate an existing WAF
 
-  lambdaRole?: string; // (Optional) Associate a lambda role with s3 bucket permissions
+  applyDefaultBucketPermission?: boolean | true;  // (Optional) Sometimes pulumi gets timing wrong if you want to apply another policy.  If omitted, the default policy will be created.
 }
 
 /**
@@ -48,50 +48,7 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
     this.s3Bucket = args.s3Bucket;
     this.originAccessIdentity = args.originAccessIdentity;
 
-    if (args.lambdaRole) {
-      this.bucketPolicy = new aws.s3.BucketPolicy(`${args.targetDomain}-bucketPolicy`, {
-        bucket: this.s3Bucket.id, // refer to the bucket created earlier
-        policy: pulumi.all([this.originAccessIdentity.iamArn, this.s3Bucket.arn]).apply(([oaiArn, bucketArn]) =>
-          JSON.stringify({
-            Version: "2012-10-17",
-            Statement: [
-              {
-                Effect: "Allow",
-                Principal: {
-                  AWS: args.lambdaRole,
-                },
-                Action: ["s3:PutObject"],
-                Resource: [`${bucketArn}/*`],
-              },
-              {
-                Effect: "Allow",
-                Principal: {
-                  AWS: args.lambdaRole,
-                },
-                Action: ["s3:ListBucket"],
-                Resource: [`${bucketArn}`],
-              },
-              {
-                Effect: "Allow",
-                Principal: {
-                  AWS: args.lambdaRole,
-                },
-                Action: ["s3:GetObject"],
-                Resource: [`${bucketArn}/*`],
-              },
-              {
-                Effect: "Allow",
-                Principal: {
-                  AWS: oaiArn,
-                },
-                Action: ["s3:GetObject"],
-                Resource: [`${bucketArn}/*`],
-              },
-            ],
-          })
-        ),
-      });
-    } else {
+    if (args.applyDefaultBucketPermission == true) {
       this.bucketPolicy = new aws.s3.BucketPolicy(`${args.targetDomain}-bucketPolicy`, {
         bucket: this.s3Bucket.id, // refer to the bucket created earlier
         policy: pulumi.all([this.originAccessIdentity.iamArn, this.s3Bucket.arn]).apply(([oaiArn, bucketArn]) =>
@@ -111,7 +68,7 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
         ),
       });
     }
-
+    
     // Cloudfront distribution
 
     // Get hosted zone
