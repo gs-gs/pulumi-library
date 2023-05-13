@@ -15,6 +15,8 @@ export interface CloudfrontWebsiteArgs {
   originAccessIdentity: aws.cloudfront.OriginAccessIdentity; // Origin Access Identity to access the private s3 bucket
 
   webAclId?: string | pulumi.Output<string>; // (Optional) Associate an existing WAF
+
+  applyDefaultBucketPermission?: boolean | true; // (Optional) Sometimes pulumi gets timing wrong if you want to apply another policy.  If omitted, the default policy will be created.
 }
 
 /**
@@ -46,24 +48,26 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
     this.s3Bucket = args.s3Bucket;
     this.originAccessIdentity = args.originAccessIdentity;
 
-    this.bucketPolicy = new aws.s3.BucketPolicy(`${args.targetDomain}-bucketPolicy`, {
-      bucket: this.s3Bucket.id, // refer to the bucket created earlier
-      policy: pulumi.all([this.originAccessIdentity.iamArn, this.s3Bucket.arn]).apply(([oaiArn, bucketArn]) =>
-        JSON.stringify({
-          Version: "2012-10-17",
-          Statement: [
-            {
-              Effect: "Allow",
-              Principal: {
-                AWS: oaiArn,
-              }, // Only allow Cloudfront read access.
-              Action: ["s3:GetObject"],
-              Resource: [`${bucketArn}/*`], // Give Cloudfront access to the entire bucket.
-            },
-          ],
-        })
-      ),
-    });
+    if (args.applyDefaultBucketPermission == true) {
+      this.bucketPolicy = new aws.s3.BucketPolicy(`${args.targetDomain}-bucketPolicy`, {
+        bucket: this.s3Bucket.id, // refer to the bucket created earlier
+        policy: pulumi.all([this.originAccessIdentity.iamArn, this.s3Bucket.arn]).apply(([oaiArn, bucketArn]) =>
+          JSON.stringify({
+            Version: "2012-10-17",
+            Statement: [
+              {
+                Effect: "Allow",
+                Principal: {
+                  AWS: oaiArn,
+                }, // Only allow Cloudfront read access.
+                Action: ["s3:GetObject"],
+                Resource: [`${bucketArn}/*`], // Give Cloudfront access to the entire bucket.
+              },
+            ],
+          })
+        ),
+      });
+    }
 
     // Cloudfront distribution
 
