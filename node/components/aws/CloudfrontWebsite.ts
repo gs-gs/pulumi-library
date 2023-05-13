@@ -33,7 +33,7 @@ export interface CloudfrontWebsiteArgs {
  */
 export class CloudfrontWebsite extends pulumi.ComponentResource {
   s3Bucket: aws.s3.Bucket;
-  bucketPolicy: aws.s3.BucketPolicy | undefined;
+  bucketPolicy!: aws.s3.BucketPolicy;
   certificate: aws.acm.Certificate;
   cloudfrontDistribution: aws.cloudfront.Distribution;
   originAccessIdentity: aws.cloudfront.OriginAccessIdentity;
