@@ -16,7 +16,7 @@ export interface CloudfrontWebsiteArgs {
 
   webAclId?: string | pulumi.Output<string>; // (Optional) Associate an existing WAF
 
-  applyDefaultBucketPermission?: boolean | true;  // (Optional) Sometimes pulumi gets timing wrong if you want to apply another policy.  If omitted, the default policy will be created.
+  applyDefaultBucketPermission?: boolean | true; // (Optional) Sometimes pulumi gets timing wrong if you want to apply another policy.  If omitted, the default policy will be created.
 }
 
 /**
@@ -68,7 +68,7 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
         ),
       });
     }
-    
+
     // Cloudfront distribution
 
     // Get hosted zone
