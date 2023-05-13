@@ -16,7 +16,7 @@ export interface CloudfrontWebsiteArgs {
 
   webAclId?: string | pulumi.Output<string>; // (Optional) Associate an existing WAF
 
-  applyDefaultBucketPermission?: boolean | true; // (Optional) Sometimes pulumi gets timing wrong if you want to apply another policy.  If omitted, the default policy will be created.
+  skipDefaultBucketPermission?: boolean; // (Optional) Sometimes pulumi gets timing wrong if you want to apply another policy.  If omitted, the default policy will be created.
 }
 
 /**
@@ -48,7 +48,7 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
     this.s3Bucket = args.s3Bucket;
     this.originAccessIdentity = args.originAccessIdentity;
 
-    if (args.applyDefaultBucketPermission == true) {
+    if (!args.skipDefaultBucketPermission) {
       this.bucketPolicy = new aws.s3.BucketPolicy(`${args.targetDomain}-bucketPolicy`, {
         bucket: this.s3Bucket.id, // refer to the bucket created earlier
         policy: pulumi.all([this.originAccessIdentity.iamArn, this.s3Bucket.arn]).apply(([oaiArn, bucketArn]) =>
