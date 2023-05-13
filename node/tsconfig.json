@@ -10,7 +10,8 @@
     "experimentalDecorators": true,
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "strict": true,
+    "strictPropertyInitialization": false
   },
   "exclude": ["dist/**/*", "dist/*", "**/*.test.ts", "*.test.ts", "**/*.spec.ts", "*.spec.ts"]
 }
