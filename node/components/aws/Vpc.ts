@@ -7,8 +7,6 @@ export interface VpcArgs extends awsx.ec2.VpcArgs {
   description: string;
 
   flowlogBucket: aws.s3.Bucket;
-
-  //vpcZones?: number | 2; // (Optional) Number of availability zones that this vpc should span across.
 }
 
 /**
