@@ -1,7 +1,6 @@
 import * as aws from "@pulumi/aws";
 import * as pulumi from "@pulumi/pulumi";
 import * as awsx from "@pulumi/awsx";
-import { IntegrationResponse } from "@pulumi/aws/apigateway";
 
 export interface VpcArgs extends awsx.ec2.VpcArgs {
   vpcName: string;
@@ -9,7 +8,7 @@ export interface VpcArgs extends awsx.ec2.VpcArgs {
 
   flowlogBucket: aws.s3.Bucket;
 
-  vpcZones?: number | 2; // (Optional) Number of availability zones that this vpc should span across.
+  //vpcZones?: number | 2; // (Optional) Number of availability zones that this vpc should span across.
 }
 
 /**
@@ -36,7 +35,7 @@ export class Vpc extends pulumi.ComponentResource {
     const { vpcName, description, ...remainingArgs } = args;
 
     this._vpc = new awsx.ec2.Vpc(args.vpcName, {
-      numberOfAvailabilityZones: args.vpcZones,
+      numberOfAvailabilityZones: 2,
       subnets: [
         {
           type: "public",
