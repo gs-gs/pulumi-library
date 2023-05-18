@@ -7,6 +7,8 @@ export interface VpcArgs extends awsx.ec2.VpcArgs {
   description: string;
 
   flowlogBucket: aws.s3.Bucket;
+
+  availabilityZones?: number | 2;
 }
 
 /**
@@ -33,7 +35,7 @@ export class Vpc extends pulumi.ComponentResource {
     const { vpcName, description, ...remainingArgs } = args;
 
     this._vpc = new awsx.ec2.Vpc(args.vpcName, {
-      numberOfAvailabilityZones: 2,
+      numberOfAvailabilityZones: args.availabilityZones,
       subnets: [
         {
           type: "public",
