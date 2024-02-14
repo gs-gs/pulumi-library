@@ -60,8 +60,8 @@ export class Vpc extends pulumi.ComponentResource {
     });
   }
 
-  public get vpc(): pulumi.Output<aws.ec2.Vpc> {
-    return this._vpc.vpc;
+  public get vpc(): pulumi.Output<awsx.ec2.Vpc> {
+    return this._vpc;
   }
 
   public vpcId(): pulumi.Output<string> {
