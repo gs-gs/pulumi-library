@@ -1,6 +1,6 @@
 import * as aws from "@pulumi/aws";
-import * as awsx from "@pulumi/awsx";
 import * as pulumi from "@pulumi/pulumi";
+import * as awsx from "@pulumi/awsx";
 
 export interface VpcArgs extends awsx.ec2.VpcArgs {
   vpcName: string;
@@ -60,7 +60,7 @@ export class Vpc extends pulumi.ComponentResource {
     });
   }
 
-  public get vpc(): awsx.ec2.Vpc {
+  public get vpc(): pulumi.Output<awsx.ec2.Vpc> {
     return this._vpc;
   }
 
@@ -68,7 +68,7 @@ export class Vpc extends pulumi.ComponentResource {
     return this._vpc.id;
   }
   public vpcDefaultSecurityGroupId(): pulumi.Output<string> {
-    return this._vpc.vpc.defaultSecurityGroupId;
+    return this.vpc.defaultSecurityGroupId;
   }
   public privateSubnetIds(): Promise<pulumi.Output<string>[]> {
     return this._vpc.privateSubnetIds;
