@@ -75,6 +75,7 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
       .getZone({ name: args.hostedZoneDomain }, { async: true })
       .then((zone) => zone.zoneId);
 
+    let certValidationComplete: aws.acm.CertificateValidation | undefined;
     if (args.certificateArn) {
       const certificateByDomain = pulumi.output(
         aws.acm.getCertificate(
@@ -108,15 +109,16 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
             })
           );
         });
+
+        certValidationComplete = new aws.acm.CertificateValidation(
+          `${args.targetDomain}-certificateValidation`,
+          {
+            certificateArn: this.certificate.arn,
+            validationRecordFqdns: certificateDnsRecords.map((record) => record.fqdn),
+          },
+          { provider: useast1 }
+        );
       });
-      const certificateValidation = new aws.acm.CertificateValidation(
-        `${args.targetDomain}-certificateValidation`,
-        {
-          certificateArn: this.certificate.arn,
-          validationRecordFqdns: certificateDnsRecords.map((record) => record.fqdn),
-        },
-        { provider: useast1 }
-      );
     }
 
     // Create Cloudfront distribution
@@ -161,14 +163,14 @@ export class CloudfrontWebsite extends pulumi.ComponentResource {
         },
       },
       viewerCertificate: {
-        acmCertificateArn: this.certificate.arn,
+        acmCertificateArn: certValidationComplete ? certValidationComplete.certificateArn : this.certificate.arn,
         sslSupportMethod: "sni-only",
       },
     };
 
-    // Enable Cloudfront access logging if argument `logBucket` is specified
-    // Get `args.logBucket` if specified, or create new S3 Bucket if not...
     if (args.logBucket !== "none") {
+      // Enable Cloudfront access logging if argument `logBucket` is specified
+      // Get `args.logBucket` if specified, or create new S3 Bucket if not...
       const logBucket = args.logBucket
         ? args.logBucket
         : new aws.s3.Bucket(`${args.targetDomain}-logs`, {
